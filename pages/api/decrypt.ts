@@ -14,15 +14,14 @@ export default async function handler(
       return;
     }
 
-    
-    const prefixLength = '[XX] '.length;
+    const prefixLength = "[XX] ".length;
     const actualEncryptedMemo = encryptedMemo.slice(prefixLength);
 
     // Decrypt
     const secretKey = process.env.SECRET_KEY as string;
     const bytes = CryptoJS.AES.decrypt(actualEncryptedMemo, secretKey);
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
-    console.log(originalText)
+    console.log(originalText);
 
     res.status(200).json({ decryptedMemo: originalText });
   } else {
